@@ -1,0 +1,1 @@
+exec AutoRegress 'TheBestTable', 'y';
