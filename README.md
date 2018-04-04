@@ -20,9 +20,9 @@ declare @table_name varchar(MAX) = 'StudentGradesTrainingData'
 declare @dependent_name varchar(MAX) = 'FinalExamGrade'
 declare @model_table_name varchar(MAX) = 'StudentGradesModels'
 declare @model_name varchar(MAX) = 'linear_model_1'
-```
 
 exec AutoRegress @database_name, @table_name, @dependent_name, @model_table_name, @model_name
+```
 
 4. The model you just trained in stored in StudentGradesModels, you can some information about it with the query:
 
@@ -42,6 +42,8 @@ exec AutoRegressPredict @database_name, @model_table_name, @model_name, @test_da
 
 6. You can view your prediction results against the actual results with the following query:
 
+```
 select StudentGradesTestData.HoursStudying, StudentGradesTestData.PreviousTestScore, StudentGradesTestData.HomeworkAverage, StudentGradesTestData.FinalExamGrade, PredictionsTable.FinalExamGrade_Pred
 from StudentGradesTestData 
 INNER JOIN PredictionsTable ON StudentGradesTestData.HomeworkAverage=PredictionsTable.HomeworkAverage;
+```
