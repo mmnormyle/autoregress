@@ -28,7 +28,9 @@ exec AutoRegress @database_name, @table_name, @dependent_name, @model_table_name
 
 4. The model you just trained in stored in StudentGradesModels, you can some information about it with the query:
 
+```sql
 select * from StudentGradesModels where model_name = 'linear_model_1'
+```
 
 5. Now, let's use the model we just trained to predict on our test set. Simply run the following query:
 
