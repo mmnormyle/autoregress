@@ -18,10 +18,14 @@ query = "select top 1 * from " + model_table_name + " where model_name = ''{}'' 
 engine = sqlalchemy.create_engine("mssql+pyodbc:///?odbc_connect={}".format(parse.quote_plus(connection_string)))
 model_df = pd.read_sql(query, engine)
 model_data = model_df["model_data"][0]
+feature_names = model_df["features"][0]
 
 model = rp.rx_unserialize_model(model_data)
 
-prediction_data = rp.RxSqlServerData(table = input_table_name, connection_string=connection_string, strings_as_factors=True)
+feature_query = "select " + feature_names + " from " + input_table_name
+print(feature_query)
+
+prediction_data = rp.RxSqlServerData(sql_query=feature_query, connection_string=connection_string)
 columns = rp.rx_get_var_info(prediction_data)
 column_names = list(columns.keys())
 output_data = rp.RxSqlServerData(table = output_table_name, connection_string=connection_string)

@@ -19,14 +19,16 @@ from urllib import parse
 
 connection_string = "Driver=SQL Server;Server=localhost;Database=" + database_name + ";Trusted_Connection=Yes;"
 
-data_source = rp.RxSqlServerData(connection_string=connection_string, table=table_name, string_as_factors=True)
+data_source = rp.RxSqlServerData(connection_string=connection_string, table=table_name)
 
 var_info = rp.rx_get_var_info(data_source)
 
 feature_names = []
 for var in var_info:
     if var != dependent_name and var_info[var]["varType"] != "character":
+        print(var_info[var]["varType"])
         feature_names.append(var)
+print(feature_names)
 
 formula = dependent_name + " ~ " + " + ".join(feature_names)
 
@@ -41,6 +43,7 @@ model_data_table = rp.RxSqlServerData(connection_string=connection_string, table
 model_info = pd.DataFrame()
 model_info["model_name"] = [model_name]
 model_info["model_data"] = [model_data]
+model_info["features"] = [",".join(feature_names)]
 model_info["timestamp"] = [time.time()]
 
 engine = sqlalchemy.create_engine("mssql+pyodbc:///?odbc_connect={}".format(parse.quote_plus(connection_string)))
