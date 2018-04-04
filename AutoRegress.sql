@@ -44,6 +44,8 @@ model_info["model_name"] = [model_name]
 model_info["model_data"] = [model_data]
 model_info["features"] = [",".join(feature_names)]
 model_info["timestamp"] = [time.time()]
+model_info["training_table"] = [table_name]
+model_info["coefficients"] = [str(dict(lin_mod.coefficients[0]))]
 
 engine = sqlalchemy.create_engine("mssql+pyodbc:///?odbc_connect={}".format(parse.quote_plus(connection_string)))
 model_info.to_sql(model_table_name, engine, if_exists="append", dtype={"model_data": sqlalchemy.types.LargeBinary})
