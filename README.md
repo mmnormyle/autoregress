@@ -1,6 +1,8 @@
 # AutoRegress
 
-AutoRegress is a SQL Server tool to create linear regression models.
+Note: this is a work in progress.
+
+AutoRegress is an (unofficial) SQL Server tool to create linear regression models.
 The data will not leave the SQL Machine and the models can be trained in a single line of code! <br>
 
 To use AutoRegress, you must have ML Services for SQL Server installed, and implied authentication enabled. Take a look at the following link: https://docs.microsoft.com/en-us/sql/advanced-analytics/install/sql-machine-learning-services-windows-install
