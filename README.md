@@ -8,7 +8,7 @@ The data will not leave the SQL Machine and the models can be trained in a singl
 Let's work through a simple example first. We're going to train a linear regression model on some (fake) student test score data. <br>
 
 1. First, restore the AutoRegressTestDB from the .bak file in this repo. You can do this in SSMS by right clicking Databases and clicking restore database.
-2. Next, install the stored procedures in the AutoRegressTestDB database. Simply run the above AutoRegress.sql and AutoRegressPredict.sql queries against the AutoRegressTestDB database.
+2. Next, run the above AutoRegress.sql and AutoRegressPredict.sql queries against the AutoRegressTestDB database. This installs the stored procedures.
 3. To perform the linear regression, just run the below query:
 
 ```
