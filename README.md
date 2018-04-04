@@ -11,6 +11,7 @@ Let's work through a simple example first. We're going to train a linear regress
 2. Next, install the stored procedures in the AutoRegressTestDB database. Simply run the above AutoRegress.sql and AutoRegressPredict.sql queries against the AutoRegressTestDB database.
 3. To perform the linear regression, just run the below query:
 
+```
 -- Trains a linear regression model on the data in the StudentGradesTrainingData table inside AutoRegressTestDB.
 -- The dependent variable is specified as FinalExamGrade.
 
@@ -19,6 +20,7 @@ declare @table_name varchar(MAX) = 'StudentGradesTrainingData' <br>
 declare @dependent_name varchar(MAX) = 'FinalExamGrade' <br>
 declare @model_table_name varchar(MAX) = 'StudentGradesModels' <br>
 declare @model_name varchar(MAX) = 'linear_model_1' <br><br>
+```
 
 exec AutoRegress @database_name, @table_name, @dependent_name, @model_table_name, @model_name <br>
 
@@ -28,6 +30,7 @@ select * from StudentGradesModels where model_name = 'linear_model_1'
 
 5. Now, let's use the model we just trained to predict on our test set. Simply run the following query:
 
+```
 declare @database_name varchar(MAX) = 'AutoRegressTestDB' <br>
 declare @test_data_table varchar(MAX) = 'StudentGradesTestData' <br>
 declare @model_table_name varchar(MAX) = 'StudentGradesModels' <br>
@@ -35,6 +38,7 @@ declare @model_name varchar(MAX) = 'linear_model_1' <br>
 declare @prediction_table_name varchar(MAX) = 'PredictionsTable' <br>
 
 exec AutoRegressPredict @database_name, @model_table_name, @model_name, @test_data_table, @prediction_table_name
+```
 
 6. You can view your prediction results against the actual results with the following query:
 
