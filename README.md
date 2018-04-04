@@ -1,6 +1,6 @@
-# autoregress
+# AutoRegress
 
-autoregress is a SQL Server tool to create linear regression models.
+AutoRegress is a SQL Server tool to create linear regression models.
 The data will not leave the SQL Machine and the models can be trained in a single line of code!
 
 # installation
