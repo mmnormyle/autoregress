@@ -1,4 +1,3 @@
--- TODO: remove character data
 -- TODO: examples, dataset and documentation
 -- TODO: store model information in table
 
