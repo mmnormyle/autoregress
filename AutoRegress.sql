@@ -25,17 +25,13 @@ var_info = rp.rx_get_var_info(data_source)
 feature_names = []
 for var in var_info:
     if var != dependent_name and var_info[var]["varType"] != "character":
-        print(var_info[var]["varType"])
         feature_names.append(var)
-print(feature_names)
 
 formula = dependent_name + " ~ " + " + ".join(feature_names)
 
 lin_mod = rp.rx_lin_mod(formula, data=data_source)
 
 model_data = rp.rx_serialize_model(lin_mod, realtime_scoring_only=False)
-
-print(type(model_data))
 
 model_data_table = rp.RxSqlServerData(connection_string=connection_string, table = model_table_name)
 
@@ -49,6 +45,8 @@ model_info["coefficients"] = [str(dict(lin_mod.coefficients[0]))]
 
 engine = sqlalchemy.create_engine("mssql+pyodbc:///?odbc_connect={}".format(parse.quote_plus(connection_string)))
 model_info.to_sql(model_table_name, engine, if_exists="append", dtype={"model_data": sqlalchemy.types.LargeBinary})
+
+print("Model successfully trained and stored in model table!")
 '
   , @params = N'
 @database_name varchar(max),
